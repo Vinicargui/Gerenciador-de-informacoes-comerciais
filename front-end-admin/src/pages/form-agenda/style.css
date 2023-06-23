@@ -1,0 +1,43 @@
+.formContainer{
+    width: 100vw;
+    height: 100vh;
+    padding: auto;
+background-color:rgb(208, 224, 224);
+
+}
+
+h1{
+    padding:10px 0px 15px 10px;
+    color: rgb(51, 51, 51);
+}
+
+ .btn1 {
+    max-width: 80%;
+} 
+
+.campos{
+    padding: 0 20px 0 20px;
+}
+
+.campo-telefone{
+    padding: 0 1000px 0 20px;
+}
+
+
+
+.endereço{
+    display: flex;
+    padding: 0 20px 0 20px;
+    margin-bottom: 50px;
+}
+.endereço label{
+    padding: 0 5px 0 5px;
+    display: flex;
+    align-items: flex-end;
+}
+
+
+
+/* .link{
+    width: 100%;
+} */

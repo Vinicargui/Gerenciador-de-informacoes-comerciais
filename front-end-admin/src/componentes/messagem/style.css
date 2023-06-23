@@ -1,0 +1,14 @@
+.container-msm{
+width: 100%;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: aliceblue;
+background:rgb(203, 223, 174);
+
+}
+
+.container-msm h3{
+    color: aliceblue;
+}
