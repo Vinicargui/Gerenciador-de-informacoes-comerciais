@@ -1,26 +1,24 @@
-const express = require("express");
-const router = express.Router();
-const Procedimento = require("../models/procedimento");
+const Procedimento = require("../../models/procedimento");
 
-router.get("/procedimento", async (req, res) => {
+const getProcedimentos = async (req, res) => {
   try {
     const procedimento = await Procedimento.find();
     res.json(procedimento);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.get("/nomeProcedimento", async (req, res) => {
+const nomeProcedimento = async (req, res) => {
   try {
     const procedimento = await Procedimento.find({}, { valor: 0 });
     res.json(procedimento);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.delete("/procedimento/:id", async (req, res) => {
+const deleteProcedimento = async (req, res) => {
   try {
     const procedimento = Procedimento.deleteOne({ _id: req.params.id });
     await procedimento;
@@ -28,9 +26,9 @@ router.delete("/procedimento/:id", async (req, res) => {
   } catch (err) {
     res.status(505).json({ message: err.message });
   }
-});
+};
 
-router.post("/procedimento", async (req, res) => {
+const postProcedimento = async (req, res) => {
   const procedimento = new Procedimento({
     nome: req.body.nome,
     valor: req.body.valor,
@@ -42,6 +40,11 @@ router.post("/procedimento", async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  getProcedimentos,
+  nomeProcedimento,
+  deleteProcedimento,
+  postProcedimento,
+};

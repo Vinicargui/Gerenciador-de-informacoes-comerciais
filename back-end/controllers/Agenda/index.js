@@ -1,21 +1,22 @@
 const router = require("express").Router();
+const Agendamento = require("../../models/agendamento");
 require("dotenv").config();
-const { Router } = require("express");
-const Agendamento = require("../models/agendamento");
+const moment = require("moment");
+
 const { Telegraf } = require("telegraf");
 const { message } = require("telegraf/filters");
 const bot = new Telegraf(process.env.CONEXAO);
 
-router.get("/agenda", async (req, res) => {
+const getAll = async (req, res) => {
   try {
     const agendamento = await Agendamento.find();
     res.json(agendamento);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.get("/agenda/:id", async (req, res) => {
+const getId = async (req, res) => {
   const id = req.params.id;
   try {
     const agendamento = await Agendamento.findById(id);
@@ -23,9 +24,9 @@ router.get("/agenda/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.delete("/agenda/:id", async (req, res) => {
+const deleteId = async (req, res) => {
   try {
     const agendamento = Agendamento.deleteOne({ _id: req.params.id });
     await agendamento;
@@ -33,9 +34,9 @@ router.delete("/agenda/:id", async (req, res) => {
   } catch (err) {
     res.status(505).json({ message: err.message });
   }
-});
+};
 
-router.post("/agenda", async (req, res) => {
+const postAgenda = async (req, res) => {
   const { cliente, data, funcionario, procedimento, horario } = req.body;
 
   const agendamento = {
@@ -63,9 +64,9 @@ router.post("/agenda", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+};
 
-router.patch("/agenda/:id", async (req, res) => {
+const patchAgenda = async (req, res) => {
   const id = req.params.id;
   const { cliente, data, funcionario, procedimento, horario } = req.body;
 
@@ -83,6 +84,6 @@ router.patch("/agenda/:id", async (req, res) => {
   } catch (error) {
     res.status(400).json({ errado: error });
   }
-});
+};
 
-module.exports = router;
+module.exports = { getAll, getId, deleteId, postAgenda, patchAgenda };

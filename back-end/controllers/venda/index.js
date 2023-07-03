@@ -1,7 +1,16 @@
-const express = require("express");
+const Venda = require("../../models/venda");
 require("dotenv").config();
-const router = express.Router();
 const nodemailer = require("nodemailer");
+
+const getVendas = async (req, res) => {
+  try {
+    const vendas = await Venda.find();
+    res.status(200).json(vendas);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Erro ao obter vendas" });
+  }
+};
 
 const transporte = nodemailer.createTransport({
   host: "smtp.office365.com",
@@ -13,19 +22,7 @@ const transporte = nodemailer.createTransport({
   },
 });
 
-const Venda = require("../models/venda");
-
-router.get("/vendas", async (req, res) => {
-  try {
-    const vendas = await Venda.find();
-    res.status(200).json(vendas);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Erro ao obter vendas" });
-  }
-});
-
-router.post("/venda", async (req, res) => {
+const postVenda = async (req, res) => {
   const { cliente, funcionario, data, procedimento, formaPagamento, valor } =
     req.body;
 
@@ -49,11 +46,11 @@ router.post("/venda", async (req, res) => {
         to: "thais.braga.8@outlook.com",
         subject: "Pagamento identificado",
         html: `<p>Pagamento realizado por ${cliente} </p>
-               <p>Valor: ${valor} </p>
-               <p>Forma de pagamento: ${formaPagamento} </p>
-               <p>Procedimento: ${procedimento} </p>
-               <p>Atendida ${funcionario}</p>
-        `,
+                 <p>Valor: ${valor} </p>
+                 <p>Forma de pagamento: ${formaPagamento} </p>
+                 <p>Procedimento: ${procedimento} </p>
+                 <p>Atendida ${funcionario}</p>
+          `,
         text: "Pagamento 20,00",
       });
 
@@ -64,9 +61,9 @@ router.post("/venda", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error });
   }
-});
+};
 
-router.delete("/venda/:id", async (req, res) => {
+const deleteVenda = async (req, res) => {
   const id = req.params.id;
 
   try {
@@ -75,6 +72,6 @@ router.delete("/venda/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+};
 
-module.exports = router;
+module.exports = { postVenda, getVendas, deleteVenda };

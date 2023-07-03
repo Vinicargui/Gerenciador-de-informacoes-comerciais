@@ -1,17 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const Funcionario = require("../models/funcionario");
+const Funcionario = require("../../models/funcionario");
 
-router.get("/funcionario", async (req, res) => {
+const getFuncionarios = async (req, res) => {
   try {
     const funcionario = await Funcionario.find();
     res.json(funcionario);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.get("/nomefuncionario", async (req, res) => {
+const nomeFunconarios = async (req, res) => {
   try {
     const funcionario = await Funcionario.find(
       {},
@@ -21,9 +19,9 @@ router.get("/nomefuncionario", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.get("/funcionario/:id", async (req, res) => {
+const funcionarioId = async (req, res) => {
   try {
     const funcionario = await Funcionario.findById(req.params.id);
     if (funcionario == null) {
@@ -33,9 +31,9 @@ router.get("/funcionario/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.post("/funcionario", async (req, res) => {
+const postFuncionario = async (req, res) => {
   const funcionario = new Funcionario({
     nome: req.body.nome,
     cargo: req.body.cargo,
@@ -51,9 +49,9 @@ router.post("/funcionario", async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-});
+};
 
-router.put("/funcionario/:id", async (req, res) => {
+const putFuncionario = async (req, res) => {
   try {
     const atualizarFuncionario = await Funcionario.findOneAndUpdate(
       { _id: req.params.id },
@@ -69,9 +67,9 @@ router.put("/funcionario/:id", async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-});
+};
 
-router.delete("/funcionario/:id", async (req, res) => {
+const deleteFuncionario = async (req, res) => {
   const id = req.params.id;
   try {
     await Funcionario.deleteOne({ _id: id });
@@ -79,6 +77,13 @@ router.delete("/funcionario/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  getFuncionarios,
+  nomeFunconarios,
+  funcionarioId,
+  postFuncionario,
+  putFuncionario,
+  deleteFuncionario,
+};

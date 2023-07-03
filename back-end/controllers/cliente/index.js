@@ -1,17 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const Cliente = require("../models/cliente");
+const Cliente = require("../../models/cliente");
 
-router.get("/", async (req, res) => {
+const getClientes = async (req, res) => {
   try {
     const clientes = await Cliente.find();
     res.json(clientes);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.delete("/:id", async (req, res) => {
+const deleteCliente = async (req, res) => {
   const id = req.params.id;
 
   try {
@@ -20,9 +18,9 @@ router.delete("/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+};
 
-router.get("/:id", async (req, res) => {
+const getIdCliente = async (req, res) => {
   try {
     const cliente = await Cliente.findById(req.params.id);
     if (cliente == null) {
@@ -32,9 +30,9 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+};
 
-router.post("/", async (req, res) => {
+const postCliente = async (req, res) => {
   const { nome, telefone, email } = req.body;
 
   const usuarioEmail = await Cliente.findOne({ email });
@@ -55,11 +53,9 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
+};
 
-  
-});
-
-router.put("/:id", async (req, res) => {
+const putCliente = async (req, res) => {
   try {
     const atualizarCliente = await Cliente.findOneAndUpdate(
       { _id: req.params.id },
@@ -75,22 +71,12 @@ router.put("/:id", async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-});
+};
 
-router.delete("/:id", async (req, res) => {
-  try {
-    const cliente = await Cliente.findById(req.params.id);
-    if (cliente == null) {
-      return res.status(404).json({ message: "Cliente não encontrado" });
-    }
-
-    await cliente.remove();
-    res.json({ message: "Cliente deletado com sucesso" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-module.exports = router;
-
-
+module.exports = {
+  getClientes,
+  deleteCliente,
+  getIdCliente,
+  postCliente,
+  putCliente,
+};
