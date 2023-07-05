@@ -1,9 +1,10 @@
-.formContainer{
+.formContainerProcedimento{
    
     width: 100vw;
-    height: 100vh;
+     height: 92vh; 
     padding: auto;
 background-color:rgb(208, 224, 224);
+
 
 }
 

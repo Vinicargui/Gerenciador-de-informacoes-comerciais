@@ -5,6 +5,7 @@ import "./style.css";
 import axios from "axios";
 import { BsFillTrashFill, BsPencil } from "react-icons/bs";
 import FuncionarioPDF from "../../relatorios/funcionario";
+import mascaraTel from "../../controle/mask";
 
 const ListaFuncionario = () => {
   const [funcionario, setFuncionario] = useState([]);

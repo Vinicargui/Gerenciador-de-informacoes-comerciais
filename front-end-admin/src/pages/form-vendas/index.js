@@ -57,7 +57,7 @@ function FormVendas() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+      <div className="formContainerVendas">
         {removeLoad && <Loading />}
         {removeMsg && <Mensagem />}
         <h1>Pagamento</h1>

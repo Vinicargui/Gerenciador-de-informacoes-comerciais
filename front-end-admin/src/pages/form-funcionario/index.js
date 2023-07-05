@@ -58,7 +58,7 @@ function FormFuncionario() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+      <div className="formContainerFuncionario">
         {removeLoad && <Loading />}
         {removeMsg && <Mensagem />}
         <h1>Cadastrar novo funcionario</h1>
@@ -91,7 +91,7 @@ function FormFuncionario() {
           <Input
             required
             value={telefone}
-            type="tel"
+            type=""
             name="telefone"
             onChange={(e) => setTelefone(e.target.value)}
             id="telefoneFuncionario"

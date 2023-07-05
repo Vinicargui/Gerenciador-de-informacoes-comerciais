@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import "./style.css";
 import axios from "axios";
 import { BsFillTrashFill, BsPencil } from "react-icons/bs";
+import formataValores from "../../controle/valores";
 
 const ListaProcedimento = () => {
   const [procedimento, setProcedimento] = useState([]);
@@ -45,7 +46,7 @@ const ListaProcedimento = () => {
               <tbody>
                 <tr key={p.id}>
                   <td>{p.nome}</td>
-                  <td>{p.valor}</td>
+                  <td>{formataValores("pt-BR", "BRL", p.valor)}</td>
                   <td>
                     <button onClick={() => Deletar(p._id)}>
                       <BsFillTrashFill />

@@ -28,6 +28,11 @@ const Lagenda = () => {
     await getAgenda();
   }
 
+  function formataData(e) {
+    let data = new Date(e);
+    return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
+  }
+
   return (
     <div className="titulo">
       <h1>Agendamentos</h1>
@@ -52,7 +57,7 @@ const Lagenda = () => {
                   <td>{a.procedimento}</td>
                   <td>{a.cliente}</td>
                   <td>{a.funcionario}</td>
-                  <td>{a.data}</td>
+                  <td>{formataData(a.data)}</td>
                   <td>{a.horario}</td>
 
                   <td>

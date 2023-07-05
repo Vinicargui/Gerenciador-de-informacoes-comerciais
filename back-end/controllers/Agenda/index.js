@@ -39,6 +39,11 @@ const deleteId = async (req, res) => {
 const postAgenda = async (req, res) => {
   const { cliente, data, funcionario, procedimento, horario } = req.body;
 
+  function formataData(e) {
+    let data = new Date(e);
+    return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
+  }
+
   const agendamento = {
     cliente,
     data,
@@ -56,7 +61,7 @@ const postAgenda = async (req, res) => {
       process.env.TELENUMERO,
       ` Agendamento realizado com sucesso! 
      Cliente: ${cliente}
-     Data: ${data}
+     Data: ${formataData(data)}
      Horario: ${horario}
      funcionária:${funcionario}
      `

@@ -74,4 +74,15 @@ const deleteVenda = async (req, res) => {
   }
 };
 
-module.exports = { postVenda, getVendas, deleteVenda };
+const getVendasData = async (req, res) => {
+  const dataAtual = Date.now();
+
+  try {
+    const vendaAtual = await Venda.find({ data: dataAtual });
+    res.status(200).json(vendaAtual);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao obter vendas atuais" });
+  }
+};
+
+module.exports = { postVenda, getVendas, deleteVenda, getVendasData };

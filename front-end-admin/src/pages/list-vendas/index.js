@@ -5,6 +5,7 @@ import "./style.css";
 import axios from "axios";
 import VendasPDF from "../../relatorios/vendas";
 import { BsFillTrashFill, BsPencil } from "react-icons/bs";
+import formataValores from "../../controle/valores";
 
 const ListaVendas = () => {
   const [vendas, setVendas] = useState([]);
@@ -58,7 +59,7 @@ const ListaVendas = () => {
                   <td>{v.cliente}</td>
                   <td>{v.funcionario}</td>
                   <td>{v.procedimento}</td>
-                  <td>{v.valor}</td>
+                  <td>{formataValores("pt-BR", "BRL", v.valor)}</td>
                   <td>{v.formaPagamento}</td>
                   <td>
                     <button onClick={() => Deletar(v._id)}>

@@ -47,7 +47,7 @@ function FormCliente() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+      <div className="formContainerCliente">
         {removeLoad && <Loading />}
         {removeSucesso && <Mensagem />}
         <h1>Cadastrar novo cliente</h1>

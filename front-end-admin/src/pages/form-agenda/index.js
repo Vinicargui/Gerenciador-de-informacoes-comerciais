@@ -60,7 +60,7 @@ function FormAgenda() {
   console.log(nomes);
   return (
     <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+      <div className="formContainerAgenda">
         {removeLoad && <Loading />}
         {removeMsg && <Mensagem />}
         <h1>Cadastrar novo Agendamento</h1>

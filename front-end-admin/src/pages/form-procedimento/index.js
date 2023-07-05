@@ -44,7 +44,7 @@ function FormProcedimento() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="formContainer">
+      <div className="formContainerProcedimento">
         {removeLoad && <Loading />}
         {removeMsg && <Mensagem />}
         <h1>Cadastrar novo Procedimento</h1>
