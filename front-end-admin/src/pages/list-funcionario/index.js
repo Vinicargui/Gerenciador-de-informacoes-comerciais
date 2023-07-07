@@ -29,6 +29,9 @@ const ListaFuncionario = () => {
     await getFuncionario();
   }
 
+
+
+
   return (
     <div className="titulo">
       <h1>Funcionarios cadastrados</h1>

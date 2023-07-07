@@ -6,6 +6,7 @@ import Loading from "../loading";
 import { Link } from "react-router-dom";
 import Mensagem from "../../componentes/messagem";
 import "./style.css";
+import { IMaskInput } from "react-imask";
 
 function FormCliente() {
   const [nome, setNome] = useState("");
@@ -77,14 +78,16 @@ function FormCliente() {
         </FormGroup>
         <FormGroup className="campo-telefone">
           <Label for="telefoneCliente">telefone</Label>
-          <Input
+          <IMaskInput
+            className="maskTel"
+            mask="(00)0000-0000"
             required
             type="tel"
             name="telefone"
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
             id="telefoneCliente"
-          ></Input>
+          />
         </FormGroup>
 
         <div className="btn1">

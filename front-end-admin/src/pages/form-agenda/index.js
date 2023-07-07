@@ -9,6 +9,7 @@ import { useNome } from "../../controle/formAgenda";
 import { useNomeProcedimento } from "../../controle/selectProcedimento";
 import Loading from "../loading";
 import Mensagem from "../../componentes/messagem";
+import { IMaskInput } from "react-imask";
 
 function FormAgenda() {
   const { nomes } = useNome();
@@ -105,24 +106,25 @@ function FormAgenda() {
         <div className="endereço">
           <Label for="cargoFuncionario">Data</Label>
           <Input
+            className="data"
             value={data}
             required
             type="date"
             name="data"
             id="cargoFuncionario"
             onChange={(e) => setData(e.target.value)}
-            placeholder="Digite a data do atendimento"
           />
 
           <Label for="cargoFuncionario">Horario</Label>
-          <Input
+          <IMaskInput
+            className="maskTel"
             required
+            mask="00:00"
             value={horario}
             type="text"
             name="horario"
             id="cargoFuncionario"
             onChange={(e) => setHorario(e.target.value)}
-            placeholder="Digite o horario do atendimento"
           />
         </div>
 

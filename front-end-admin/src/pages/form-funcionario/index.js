@@ -1,11 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import axios from "axios";
 import { Button, FormGroup, Label, Input } from "reactstrap";
 import Loading from "../loading";
 import Mensagem from "../../componentes/messagem";
 import "./style.css";
 import { Link } from "react-router-dom";
+import { IMaskInput } from "react-imask";
 
 function FormFuncionario() {
   const [nome, setNome] = useState("");
@@ -16,6 +17,16 @@ function FormFuncionario() {
   const [numero, setNumero] = useState("");
   const [removeLoad, setLoad] = useState(false);
   const [removeMsg, setMsg] = useState(false);
+  const mask = useRef();
+
+  function teste() {
+    mask.current.addEventListener("keypress", () => {
+      let masklength = mask.current.value.length;
+      if (masklength === 2) {
+        mask.value += "-";
+      }
+    });
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -56,6 +67,8 @@ function FormFuncionario() {
     }
   }
 
+  const inputtel = document.querySelector("telefoneFuncionario");
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="formContainerFuncionario">
@@ -88,14 +101,18 @@ function FormFuncionario() {
         </FormGroup>
         <FormGroup className="campo-telefone">
           <Label for="telefoneFuncionario">telefone</Label>
-          <Input
+          <IMaskInput
+            className="maskTel"
+            mask="(00)00000-0000"
             required
             value={telefone}
-            type=""
+            type="telefone'"
+            maxLength="11"
             name="telefone"
             onChange={(e) => setTelefone(e.target.value)}
             id="telefoneFuncionario"
-          ></Input>
+            ref={mask}
+          />
         </FormGroup>
         <div className="endereço">
           <Label for="cargoFuncionario">Bairro</Label>
